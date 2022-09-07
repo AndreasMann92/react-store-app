@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useContext, useState } from "react";
 import { Button } from "../button/button-component";
 import { FormInput } from "../form-input/form-input.component";
 import {
@@ -8,33 +8,37 @@ import {
 } from "../../utils/firebase.utils";
 
 import "./sign-in.scss";
+import { UserContext } from "../../contexts/user.context";
 
 type Login = {
   email: string;
   password: string;
 };
 
-export const SignIn = () => {
-  const loginDefault = {
-    email: "",
-    password: "",
-  };
+const loginDefault = {
+  email: "",
+  password: "",
+};
 
+export const SignIn = () => {
   const [authFields, setAuthFields] = useState<Login>(loginDefault);
   const { email, password } = authFields;
+
+  const { setCurrentUser } = useContext(UserContext);
 
   const logGoogleUser = async () => {
     const { user } = await signInWithGooglePopup();
     await createUserDocumentFromAuth(user);
   };
 
-  const logInternal = async (event: ChangeEvent<HTMLFormElement>) => {
+  const loginInternal = async (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!email || !password) return;
 
     try {
       const { user } = await signIn(email, password);
       if (user) {
+        setCurrentUser(user);
         await createUserDocumentFromAuth(user);
         clearForm();
       }
@@ -57,7 +61,7 @@ export const SignIn = () => {
     <div className="sign-in-form">
       <h2>I already have an account</h2>
       <span>Sign up with your email and password</span>
-      <form onSubmit={logInternal}>
+      <form onSubmit={loginInternal}>
         <FormInput
           required
           label="Email"

@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useContext, useState } from "react";
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
@@ -8,6 +8,7 @@ import { FormInput } from "../form-input/form-input.component";
 import "./sign-up.scss";
 import "../button/button-component.scss";
 import { Button } from "../button/button-component";
+import { UserContext } from "../../contexts/user.context";
 
 type SignUpForm = {
   displayName: string;
@@ -16,16 +17,18 @@ type SignUpForm = {
   confirmPassword: string;
 };
 
-export const SignUp = () => {
-  const defaultFormFields = {
-    displayName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  };
+const defaultFormFields = {
+  displayName: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+};
 
+export const SignUp = () => {
   const [formFields, setFormFields] = useState<SignUpForm>(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
+
+  const { setCurrentUser } = useContext(UserContext);
 
   const resetForm = () => {
     setFormFields(defaultFormFields);
@@ -33,7 +36,7 @@ export const SignUp = () => {
 
   const handleSubmit = async (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (password != confirmPassword) return;
+    if (password !== confirmPassword) return;
     try {
       const response = await createAuthUserWithEmailAndPassword(
         email,
@@ -42,6 +45,7 @@ export const SignUp = () => {
       if (response) {
         const { user } = response;
         await createUserDocumentFromAuth(user, { displayName });
+        setCurrentUser(user);
         resetForm();
       }
     } catch ({ message, code }) {
