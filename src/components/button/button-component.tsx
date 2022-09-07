@@ -9,11 +9,7 @@ const BUTTON_TYPES_CLASSES: { [key: string]: string } = {
   inverted: "inverted",
 };
 
-export const Button: FC<PropsWithChildren<ButtonProps>> = ({
-  buttonType,
-  children,
-  ...props
-}) => {
+export const Button: FC<ButtonProps> = ({ buttonType, children, ...props }) => {
   return (
     <button
       className={`button-container ${

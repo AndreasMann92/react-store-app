@@ -58,7 +58,7 @@ export const SignUp = () => {
   };
 
   return (
-    <div className="sign-up-container">
+    <div className="sign-up-form">
       <h2>Don't have an account?</h2>
       <span>Sign up with your email and password</span>
       <form onSubmit={handleSubmit}>
