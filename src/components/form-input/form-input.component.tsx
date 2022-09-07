@@ -11,12 +11,12 @@ type FormInputProps = {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 };
 
-export const FormInput: FC<FormInputProps> = ({ label, ...other }) => {
+export const FormInput: FC<FormInputProps> = ({ label, ...props }) => {
   return (
     <div className="form-group">
-      <input className="form-input" {...other} />
+      <input className="form-input" {...props} />
       {label && (
-        <label className={`${other.value.length ? "shrink" : ""} form-label`}>
+        <label className={`${props.value.length ? "shrink" : ""} form-label`}>
           {label}
         </label>
       )}
