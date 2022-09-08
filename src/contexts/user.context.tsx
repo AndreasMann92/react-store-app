@@ -1,5 +1,15 @@
 import { User } from "firebase/auth";
-import { createContext, FC, PropsWithChildren, useState } from "react";
+import {
+  createContext,
+  FC,
+  PropsWithChildren,
+  useEffect,
+  useState,
+} from "react";
+import {
+  createUserDocumentFromAuth,
+  onAuthStageChangedListener,
+} from "../utils/firebase.utils";
 
 type UserInfo = {
   currentUser?: User;
@@ -14,5 +24,15 @@ export const UserContext = createContext<UserInfo>({
 export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
   const [currentUser, setCurrentUser] = useState<User>();
   const value = { currentUser, setCurrentUser };
+
+  useEffect(() => {
+    onAuthStageChangedListener((user) => {
+      if (user) {
+        createUserDocumentFromAuth(user);
+        setCurrentUser(user);
+      }
+    });
+  }, []);
+
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
