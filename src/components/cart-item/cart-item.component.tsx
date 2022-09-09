@@ -1,12 +1,8 @@
 import { FC } from "react";
-import { Product } from "../../contexts/products.context";
+import { CartItemData } from "../../contexts/cart.context";
 import "./cart-item.scss";
 
-export type CartItemProps = {
-  quantity: number;
-} & Product;
-
-export const CartItem: FC<{ cartItem: CartItemProps }> = ({ cartItem }) => {
+export const CartItem: FC<{ cartItem: CartItemData }> = ({ cartItem }) => {
   const { name, quantity, imageUrl, price } = cartItem;
   return (
     <div className="cart-item-container">
