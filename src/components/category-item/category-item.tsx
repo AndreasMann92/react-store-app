@@ -1,6 +1,9 @@
 import { FC } from "react";
-
-import "./category-item.scss";
+import {
+  BackgroundImage,
+  CategoryBodyContainer,
+  CategoryItemContainer,
+} from "./category-item.styles.jsx";
 
 type Category = {
   title: string;
@@ -14,15 +17,12 @@ type CategoryItemProps = {
 export const CategoryItem: FC<CategoryItemProps> = ({ category }) => {
   const { title, imageUrl } = category;
   return (
-    <div className="category-item-container">
-      <div
-        className="background-image"
-        style={{ backgroundImage: `url(${imageUrl})` }}
-      />
-      <div className="category-body-container">
+    <CategoryItemContainer to={`/shop/${title}`}>
+      <BackgroundImage imageUrl={imageUrl} />
+      <CategoryBodyContainer>
         <h2>{title}</h2>
         <p>Shop now</p>
-      </div>
-    </div>
+      </CategoryBodyContainer>
+    </CategoryItemContainer>
   );
 };

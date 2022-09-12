@@ -1,7 +1,8 @@
 import { FC } from "react";
 import { CategoryItem } from "../category-item/category-item";
 
-import "./category-menu.scss";
+import "./category-menu.styles.jsx";
+import { CategoryMenuContainer } from "./category-menu.styles.jsx";
 
 type Category = {
   id: number;
@@ -15,10 +16,10 @@ type CategoryMenuProps = {
 
 export const CategoryMenu: FC<CategoryMenuProps> = ({ categories }) => {
   return (
-    <div className="category-menu-container">
+    <CategoryMenuContainer>
       {categories.map((category) => {
         return <CategoryItem key={category.id} category={category} />;
       })}
-    </div>
+    </CategoryMenuContainer>
   );
 };

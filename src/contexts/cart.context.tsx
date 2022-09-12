@@ -5,7 +5,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { Product } from "./products.context";
+import { Product } from "./categories.context";
 
 type CartContextType = {
   isCartOpen: boolean;

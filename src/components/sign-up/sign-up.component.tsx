@@ -6,10 +6,11 @@ import {
 import { FormInput } from "../form-input/form-input.component";
 
 import { Button } from "../button/button-component";
-import "../button/button-component.scss";
-import "./sign-up.scss";
+import "../button/button.styles.jsx";
+import "./sign-up.styles.jsx";
+import { SignUpForm } from "./sign-up.styles.jsx";
 
-type SignUpForm = {
+type SignUpFormType = {
   displayName: string;
   email: string;
   password: string;
@@ -24,7 +25,8 @@ const defaultFormFields = {
 };
 
 export const SignUp = () => {
-  const [formFields, setFormFields] = useState<SignUpForm>(defaultFormFields);
+  const [formFields, setFormFields] =
+    useState<SignUpFormType>(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
 
   const resetForm = () => {
@@ -58,7 +60,7 @@ export const SignUp = () => {
   };
 
   return (
-    <div className="sign-up-form">
+    <SignUpForm>
       <h2>Don't have an account?</h2>
       <span>Sign up with your email and password</span>
       <form onSubmit={handleSubmit}>
@@ -96,6 +98,6 @@ export const SignUp = () => {
         />
         <Button type="submit">Sign Up</Button>
       </form>
-    </div>
+    </SignUpForm>
   );
 };

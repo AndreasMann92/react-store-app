@@ -1,23 +1,28 @@
-import { FC, PropsWithChildren } from "react";
+import { FC } from "react";
+import {
+  BaseButton,
+  GoogleSignInButton,
+  InvertedButton,
+} from "./button.styles";
 
 type ButtonProps = {
-  buttonType?: string;
+  buttonType?: ButtonType;
 } & JSX.IntrinsicElements["button"];
 
-const BUTTON_TYPES_CLASSES: { [key: string]: string } = {
-  google: "google-sign-in",
-  inverted: "inverted",
-};
+export enum ButtonType {
+  BASE = "base",
+  GOOGLE = "google-sign-in",
+  INVERTED = "inverted",
+}
+
+const getButton = (buttonType: ButtonType = ButtonType.BASE) =>
+  ({
+    [ButtonType.BASE]: BaseButton,
+    [ButtonType.GOOGLE]: GoogleSignInButton,
+    [ButtonType.INVERTED]: InvertedButton,
+  }[buttonType]);
 
 export const Button: FC<ButtonProps> = ({ buttonType, children, ...props }) => {
-  return (
-    <button
-      className={`button-container ${
-        buttonType ? BUTTON_TYPES_CLASSES[buttonType] : ""
-      }`}
-      {...props}
-    >
-      {children}
-    </button>
-  );
+  const CustomButton: any = getButton(buttonType);
+  return <CustomButton {...props}>{children}</CustomButton>;
 };

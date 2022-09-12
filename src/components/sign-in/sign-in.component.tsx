@@ -1,9 +1,10 @@
 import { ChangeEvent, useState } from "react";
 import { signIn, signInWithGooglePopup } from "../../utils/firebase.utils";
-import { Button } from "../button/button-component";
+import { Button, ButtonType } from "../button/button-component";
 import { FormInput } from "../form-input/form-input.component";
 
-import "./sign-in.scss";
+import "./sign-in.styles.jsx";
+import { Buttons, SignInForm } from "./sign-in.styles.jsx";
 
 type Login = {
   email: string;
@@ -48,7 +49,7 @@ export const SignIn = () => {
   };
 
   return (
-    <div className="sign-in-form">
+    <SignInForm>
       <h2>I already have an account</h2>
       <span>Sign up with your email and password</span>
       <form onSubmit={loginInternal}>
@@ -68,13 +69,17 @@ export const SignIn = () => {
           onChange={handleChange}
           value={password}
         />
-        <div className="buttons">
+        <Buttons>
           <Button type="submit">Sign In</Button>
-          <Button type="button" buttonType="google" onClick={logGoogleUser}>
+          <Button
+            type="button"
+            buttonType={ButtonType.GOOGLE}
+            onClick={logGoogleUser}
+          >
             Google Sign In
           </Button>
-        </div>
+        </Buttons>
       </form>
-    </div>
+    </SignInForm>
   );
 };

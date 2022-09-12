@@ -1,6 +1,16 @@
 import { FC, useContext } from "react";
 import { CartContext, CartItemData } from "../../contexts/cart.context";
-import "./checkout-item.scss";
+import "./checkout-item.styles.jsx";
+import {
+  Arrow,
+  CheckoutItemContainer,
+  ImageContainer,
+  Name,
+  Price,
+  Quantity,
+  RemoveButton,
+  Value,
+} from "./checkout-item.styles.jsx";
 
 export const CheckoutItem: FC<{ cartItem: CartItemData }> = ({ cartItem }) => {
   const { decreaseItemQuantity, increaseItemQuantity, removeItemFromCart } =
@@ -13,24 +23,18 @@ export const CheckoutItem: FC<{ cartItem: CartItemData }> = ({ cartItem }) => {
   const removeItemFromCartHandler = () => removeItemFromCart(cartItem);
 
   return (
-    <div className="checkout-item-container">
-      <div className="image-container">
+    <CheckoutItemContainer>
+      <ImageContainer>
         <img src={imageUrl} alt={`${name}`} />
-      </div>
-      <span className="name">{name}</span>
-      <span className="quantity">
-        <div className="arrow" onClick={decreaseQuantityHandler}>
-          &#10094;
-        </div>
-        <div className="value">{quantity}</div>
-        <div className="arrow" onClick={increaseQuantityHandler}>
-          &#10095;
-        </div>
-      </span>
-      <span className="price">{price}€</span>
-      <div className="remove-button" onClick={removeItemFromCartHandler}>
-        &#10005;
-      </div>
-    </div>
+      </ImageContainer>
+      <Name>{name}</Name>
+      <Quantity className="quantity">
+        <Arrow onClick={decreaseQuantityHandler}>&#10094;</Arrow>
+        <Value>{quantity}</Value>
+        <Arrow onClick={increaseQuantityHandler}>&#10095;</Arrow>
+      </Quantity>
+      <Price>{price}€</Price>
+      <RemoveButton onClick={removeItemFromCartHandler}>&#10005;</RemoveButton>
+    </CheckoutItemContainer>
   );
 };
