@@ -3,7 +3,7 @@ import {
   BackgroundImage,
   CategoryBodyContainer,
   CategoryItemContainer,
-} from "./category-item.styles.jsx";
+} from "./category-item.styles";
 
 type Category = {
   title: string;

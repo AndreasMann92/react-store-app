@@ -1,6 +1,6 @@
 import { ChangeEvent, FC } from "react";
 
-import { FormGroup, FormInputLabel, Input } from "./form-input.styles.jsx";
+import { FormGroup, FormInputLabel, Input } from "./form-input.styles";
 
 type FormInputProps = {
   required: boolean;
@@ -16,7 +16,7 @@ export const FormInput: FC<FormInputProps> = ({ label, ...props }) => {
     <FormGroup>
       <Input {...props} />
       {label && (
-        <FormInputLabel shrink={props.value.length}>{label}</FormInputLabel>
+        <FormInputLabel shrink={!!props.value.length}>{label}</FormInputLabel>
       )}
     </FormGroup>
   );

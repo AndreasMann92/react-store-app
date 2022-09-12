@@ -1,17 +1,13 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const Image = styled.div`
+export const BackgroundImage = styled.div<{ imageUrl: string }>`
   width: 100%;
   height: 100%;
   background-size: cover;
   background-position: center;
-  background-image: ${({imageUrl}) => `url(${imageUrl})`};
+  background-image: ${({ imageUrl }) => `url(${imageUrl})`};
 `;
-
-export const BackgroundImage = ({imageUrl}) => {
-  return <Image imageUrl={imageUrl}></Image>
-}
 
 export const CategoryBodyContainer = styled.div`
   height: 90px;
@@ -32,7 +28,7 @@ export const CategoryBodyContainer = styled.div`
     color: #4a4a4a;
     text-transform: uppercase;
   }
-  
+
   p {
     font-weight: lighter;
     font-size: 16px;
@@ -71,7 +67,3 @@ export const CategoryItemContainer = styled(Link)`
     margin-left: 7.5px;
   }
 `;
-
-
-
-
