@@ -16,12 +16,12 @@ type ProductCardProps = {
 
 export const ProductCard: FC<ProductCardProps> = ({ product }) => {
   const { name, price, imageUrl } = product;
+  const { addItemToCart } = useContext(CartContext);
 
   const onProductAddHandler = () => {
     addItemToCart(product);
   };
 
-  const { addItemToCart } = useContext(CartContext);
   return (
     <ProductCardContainer>
       <img src={imageUrl} alt={`${name}`} />

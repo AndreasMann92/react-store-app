@@ -11,15 +11,18 @@ import {
   createUserDocumentFromAuth,
   onAuthStageChangedListener,
 } from "../utils/firebase.utils";
+import { createAction } from "../utils/reducer.utils";
 
 enum UserActionType {
   SET_CURRENT_USER,
 }
 
-interface UserAction {
-  type: UserActionType;
+type UserAction = SetUserAction;
+
+type SetUserAction = {
+  type: UserActionType.SET_CURRENT_USER;
   payload: User | undefined;
-}
+};
 
 interface UserInfo {
   currentUser: User | undefined;
@@ -51,7 +54,7 @@ const INITIAL_STATE: UserInfo = {
 export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
   const [{ currentUser }, dispatch] = useReducer(userReducer, INITIAL_STATE);
   const setCurrentUser = (user: User | undefined) => {
-    dispatch({ type: UserActionType.SET_CURRENT_USER, payload: user });
+    dispatch(createAction(UserActionType.SET_CURRENT_USER, user));
   };
 
   const value = { currentUser, setCurrentUser };

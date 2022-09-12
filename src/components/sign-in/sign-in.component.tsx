@@ -35,7 +35,6 @@ export const SignIn = () => {
       }
     } catch ({ message, code }) {
       if (code === "auth/wrong-password") alert("incorrect password for email");
-      console.log("login error", message);
     }
   };
 

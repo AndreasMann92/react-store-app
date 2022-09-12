@@ -50,7 +50,6 @@ export const SignUp = () => {
       if (code === "auth/email-already-in-use") {
         alert("Cannot create user, email already in use!");
       }
-      console.log("user creation", message);
     }
   };
 
