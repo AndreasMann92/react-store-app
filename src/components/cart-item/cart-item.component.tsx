@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { CartItemData } from "../../contexts/cart.context";
+import { CartItemData } from "../../store/cart/cart.types.js";
 import { CartItemContainer, ItemDetails, Name } from "./cart-item.styles.jsx";
 
 export const CartItem: FC<{ cartItem: CartItemData }> = ({ cartItem }) => {

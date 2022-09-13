@@ -1,14 +1,14 @@
 import { Reducer } from "redux";
-import { UserAction, UserActionType, UserInfo } from "./user.types";
+import { UserAction, UserActionType, UserState } from "./user.types";
 
-const INITIAL_STATE: UserInfo = {
+const INITIAL_STATE: UserState = {
   currentUser: undefined,
 };
 
-export const userReducer: Reducer<UserInfo, UserAction> = (
-  state: UserInfo = INITIAL_STATE,
+export const userReducer: Reducer<UserState, UserAction> = (
+  state: UserState = INITIAL_STATE,
   action: UserAction
-): UserInfo => {
+): UserState => {
   const { type, payload } = action;
 
   switch (type) {

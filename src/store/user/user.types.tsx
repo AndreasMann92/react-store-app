@@ -4,12 +4,11 @@ export enum UserActionType {
   SET_CURRENT_USER = "user/SET_CURRENT_USER",
 }
 
-export type UserAction = SetUserAction;
-
-export type UserInfo = {
+export type UserState = {
   currentUser: User | undefined;
-  setCurrentUser?: (user: User | undefined) => void;
 };
+
+export type UserAction = SetUserAction;
 
 type SetUserAction = {
   type: UserActionType.SET_CURRENT_USER;
