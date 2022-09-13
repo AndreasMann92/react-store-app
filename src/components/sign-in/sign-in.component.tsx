@@ -2,8 +2,6 @@ import { ChangeEvent, useState } from "react";
 import { signIn, signInWithGooglePopup } from "../../utils/firebase.utils";
 import { Button, ButtonType } from "../button/button-component";
 import { FormInput } from "../form-input/form-input.component";
-
-import "./sign-in.styles.jsx";
 import { Buttons, SignInForm } from "./sign-in.styles.jsx";
 
 type Login = {

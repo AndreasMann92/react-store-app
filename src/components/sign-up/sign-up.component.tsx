@@ -7,7 +7,6 @@ import { FormInput } from "../form-input/form-input.component";
 
 import { Button } from "../button/button-component";
 import "../button/button.styles.jsx";
-import "./sign-up.styles.jsx";
 import { SignUpForm } from "./sign-up.styles.jsx";
 
 type SignUpFormType = {

@@ -73,11 +73,13 @@ export const createUserDocumentFromAuth = async (userAuth: UserInfo, info = {}) 
   return userDocRef;
 };
 
-export const createAuthUserWithEmailAndPassword =async (email:string, password:string) => {
+export const createAuthUserWithEmailAndPassword = async (email:string, password:string) => {
   if(!email || !password) return;
-  return await createUserWithEmailAndPassword(auth, email, password);
+  return createUserWithEmailAndPassword(auth, email, password);
 }
 
-export const signOutUser = async() => await signOut(auth);
+export const signOutUser = async() => {
+  signOut(auth).then();
+}
 
 export const onAuthStageChangedListener = (callback: NextOrObserver<User>) => onAuthStateChanged(auth, callback);
