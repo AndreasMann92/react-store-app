@@ -2,8 +2,8 @@
 import { initializeApp } from "firebase/app";
 import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, NextOrObserver, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, User, UserInfo } from 'firebase/auth';
 import { collection, doc, getDoc, getDocs, getFirestore, query, setDoc, writeBatch } from "firebase/firestore";
-import { Product } from "../contexts/categories.context";
 import { ProductGroup } from "../shop-data";
+import { CategoryArray } from "../store/category/category.types";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -43,16 +43,11 @@ export const addCollectionAndDocuments = async (collectionKey: string, objectsTo
   await batch.commit();
 }
 
-export const getCollectionAndDocuments = async () => {
+export const getCollectionAndDocuments = async (): Promise<CategoryArray> => {
   const collectionRef = collection(db, 'categories');
   const q = query(collectionRef);
   const querySnapshot = await getDocs(q);
-  const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot)=>{
-    const {title, items} = docSnapshot.data();
-    acc[title.toLowerCase()] = items;
-    return acc;
-  },{} as {[key: string]: Product[]})
-  return categoryMap;
+  return querySnapshot.docs.map(docSnapshot => docSnapshot.data()) as CategoryArray;
 }
 
 export const createUserDocumentFromAuth = async (userAuth: UserInfo, info = {}) => {

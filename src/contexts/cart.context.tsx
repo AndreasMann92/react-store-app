@@ -5,8 +5,8 @@ import {
   Reducer,
   useReducer,
 } from "react";
+import { Product } from "../store/category/category.types";
 import { createAction } from "../utils/reducer.utils";
-import { Product } from "./categories.context";
 
 enum ActionType {
   SET_CART_ITEMS,

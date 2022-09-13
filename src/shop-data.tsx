@@ -1,4 +1,4 @@
-import { Product } from "./contexts/categories.context";
+import { Product } from "./store/category/category.types";
 
 export type ProductGroup = {
   title: string;

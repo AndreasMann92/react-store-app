@@ -24,7 +24,7 @@ export const App = () => {
       dispatch(setCurrentUser(user));
     });
     return unsub;
-  }, []);
+  });
 
   return (
     <Routes>

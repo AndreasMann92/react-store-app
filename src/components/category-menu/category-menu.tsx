@@ -1,7 +1,5 @@
 import { FC } from "react";
 import { CategoryItem } from "../category-item/category-item";
-
-import "./category-menu.styles.jsx";
 import { CategoryMenuContainer } from "./category-menu.styles.jsx";
 
 type Category = {

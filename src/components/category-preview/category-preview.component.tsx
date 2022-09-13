@@ -1,7 +1,6 @@
 import { FC } from "react";
-import { Product } from "../../contexts/categories.context";
+import { Product } from "../../store/category/category.types";
 import { ProductCard } from "../product-card/product-card.component";
-import "./category-preview.styles.jsx";
 import {
   CategoryPreviewContainer,
   Preview,

@@ -1,8 +1,7 @@
 import { FC, useContext } from "react";
 import { CartContext } from "../../contexts/cart.context";
-import { Product } from "../../contexts/categories.context";
+import { Product } from "../../store/category/category.types";
 import { Button, ButtonType } from "../button/button-component";
-import "./product-card.styles.jsx";
 import {
   Footer,
   Name,
