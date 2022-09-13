@@ -11,13 +11,13 @@ export const INITIAL_STATE: CategoryState = {
 export const categoriesReducer = (
   state: CategoryState = INITIAL_STATE,
   action: CategoryAction
-) => {
+): CategoryState => {
   const { type, payload } = action;
 
   switch (type) {
     case CategoryActionType.SET_CATEGORIES:
       return { ...state, categories: payload };
     default:
-      return { ...state };
+      return state;
   }
 };

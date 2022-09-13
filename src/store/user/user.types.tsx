@@ -1,7 +1,7 @@
 import { User } from "firebase/auth";
 
 export enum UserActionType {
-  SET_CURRENT_USER,
+  SET_CURRENT_USER = "user/SET_CURRENT_USER",
 }
 
 export type UserAction = SetUserAction;

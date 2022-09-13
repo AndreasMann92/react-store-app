@@ -1,5 +1,5 @@
 export enum CategoryActionType {
-  SET_CATEGORIES,
+  SET_CATEGORIES = "category/SET_CATEGORIES",
 }
 
 export type Product = {
