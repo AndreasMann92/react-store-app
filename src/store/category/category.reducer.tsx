@@ -6,6 +6,8 @@ import {
 
 export const INITIAL_STATE: CategoryState = {
   categories: [],
+  isLoading: false,
+  error: void 0,
 };
 
 export const categoriesReducer = (
@@ -15,8 +17,12 @@ export const categoriesReducer = (
   const { type, payload } = action;
 
   switch (type) {
-    case CategoryActionType.SET_CATEGORIES:
-      return { ...state, categories: payload };
+    case CategoryActionType.FETCH_CATEGORIES_START:
+      return { ...state, isLoading: true };
+    case CategoryActionType.FETCH_CATEGORIES_SUCCESS:
+      return { ...state, isLoading: false, categories: payload };
+    case CategoryActionType.FETCH_CATEGORIES_FAIL:
+      return { ...state, isLoading: false, error: payload };
     default:
       return state;
   }

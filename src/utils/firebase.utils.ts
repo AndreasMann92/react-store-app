@@ -43,7 +43,7 @@ export const addCollectionAndDocuments = async (collectionKey: string, objectsTo
   await batch.commit();
 }
 
-export const getCollectionAndDocuments = async (): Promise<CategoryArray> => {
+export const getCategoriesAndDocuments = async (): Promise<CategoryArray> => {
   const collectionRef = collection(db, 'categories');
   const q = query(collectionRef);
   const querySnapshot = await getDocs(q);
@@ -65,7 +65,7 @@ export const createUserDocumentFromAuth = async (userAuth: UserInfo, info = {}) 
     }
   
   }
-  return userDocRef;
+  return userSnapshot;
 };
 
 export const createAuthUserWithEmailAndPassword = async (email:string, password:string) => {
@@ -78,3 +78,13 @@ export const signOutUser = async() => {
 }
 
 export const onAuthStageChangedListener = (callback: NextOrObserver<User>) => onAuthStateChanged(auth, callback);
+
+
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(auth, (userAuth) => {
+      unsubscribe();
+      resolve(userAuth);
+    }, reject);
+  })
+}

@@ -1,5 +1,9 @@
 import { ChangeEvent, useState } from "react";
-import { signIn, signInWithGooglePopup } from "../../utils/firebase.utils";
+import { useDispatch } from "react-redux";
+import {
+  emailSignInStart,
+  googleSignInStart,
+} from "../../store/user/user.action";
 import { Button, ButtonType } from "../button/button-component";
 import { FormInput } from "../form-input/form-input.component";
 import { Buttons, SignInForm } from "./sign-in.styles.jsx";
@@ -15,11 +19,12 @@ const loginDefault = {
 };
 
 export const SignIn = () => {
+  const dispatch = useDispatch();
   const [authFields, setAuthFields] = useState<Login>(loginDefault);
   const { email, password } = authFields;
 
-  const logGoogleUser = async () => {
-    await signInWithGooglePopup();
+  const loginGoogle = async () => {
+    dispatch(googleSignInStart());
   };
 
   const loginInternal = async (event: ChangeEvent<HTMLFormElement>) => {
@@ -27,10 +32,8 @@ export const SignIn = () => {
     if (!email || !password) return;
 
     try {
-      const { user } = await signIn(email, password);
-      if (user) {
-        clearForm();
-      }
+      dispatch(emailSignInStart(email, password));
+      clearForm();
     } catch ({ message, code }) {
       if (code === "auth/wrong-password") alert("incorrect password for email");
     }
@@ -71,7 +74,7 @@ export const SignIn = () => {
           <Button
             type="button"
             buttonType={ButtonType.GOOGLE}
-            onClick={logGoogleUser}
+            onClick={loginGoogle}
           >
             Google Sign In
           </Button>
