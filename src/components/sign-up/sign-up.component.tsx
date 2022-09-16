@@ -4,8 +4,8 @@ import { FormInput } from "../form-input/form-input.component";
 import { useDispatch } from "react-redux";
 import { signUpStart } from "../../store/user/user.action";
 import { Button } from "../button/button-component";
-import "../button/button.styles.jsx";
-import { SignUpForm } from "./sign-up.styles.jsx";
+import "../button/button.styles";
+import { SignUpForm } from "./sign-up.styles";
 
 type SignUpFormType = {
   displayName: string;

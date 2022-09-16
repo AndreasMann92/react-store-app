@@ -3,10 +3,12 @@ import {
   BaseButton,
   GoogleSignInButton,
   InvertedButton,
+  LoadingSpinner,
 } from "./button.styles";
 
 type ButtonProps = {
   buttonType?: ButtonType;
+  isLoading?: boolean;
 } & JSX.IntrinsicElements["button"];
 
 export enum ButtonType {
@@ -22,7 +24,16 @@ const getButton = (buttonType: ButtonType = ButtonType.BASE) =>
     [ButtonType.INVERTED]: InvertedButton,
   }[buttonType]);
 
-export const Button: FC<ButtonProps> = ({ buttonType, children, ...props }) => {
+export const Button: FC<ButtonProps> = ({
+  buttonType,
+  children,
+  isLoading = false,
+  ...props
+}) => {
   const CustomButton: any = getButton(buttonType);
-  return <CustomButton {...props}>{children}</CustomButton>;
+  return (
+    <CustomButton disabled={isLoading} {...props}>
+      {isLoading ? <LoadingSpinner /> : children}
+    </CustomButton>
+  );
 };
