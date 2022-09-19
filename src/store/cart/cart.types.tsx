@@ -1,4 +1,4 @@
-import { Product } from "../category/category.types";
+import { CategoryItem } from "../category/category.types";
 
 export enum CartActionType {
   SET_IS_OPEN = "cart/SET_IS_OPEN",
@@ -9,7 +9,7 @@ export enum CartActionType {
 
 export type CartItemData = {
   quantity: number;
-} & Product;
+} & CategoryItem;
 
 export type CartState = {
   isCartOpen: boolean;

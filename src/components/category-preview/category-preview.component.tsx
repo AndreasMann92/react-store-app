@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Product } from "../../store/category/category.types";
+import { CategoryItem } from "../../store/category/category.types";
 import { ProductCard } from "../product-card/product-card.component";
 import {
   CategoryPreviewContainer,
@@ -9,7 +9,7 @@ import {
 
 type CategoryPreviewProps = {
   title: string;
-  products: Product[];
+  products: CategoryItem[];
 };
 
 export const CategoryPreview: FC<CategoryPreviewProps> = ({

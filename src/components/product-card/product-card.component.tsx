@@ -2,7 +2,7 @@ import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addItemToCart } from "../../store/cart/cart.action";
 import { selectCartItems } from "../../store/cart/cart.selector";
-import { Product } from "../../store/category/category.types";
+import { CategoryItem } from "../../store/category/category.types";
 import { Button, ButtonType } from "../button/button-component";
 import {
   Footer,
@@ -12,7 +12,7 @@ import {
 } from "./product-card.styles.jsx";
 
 type ProductCardProps = {
-  product: Product;
+  product: CategoryItem;
 };
 
 export const ProductCard: FC<ProductCardProps> = ({ product }) => {

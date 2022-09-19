@@ -1,8 +1,8 @@
-import { Product } from "./store/category/category.types";
+import { CategoryItem } from "./store/category/category.types";
 
 export type ProductGroup = {
   title: string;
-  items: Product[];
+  items: CategoryItem[];
 };
 
 export const SHOP_DATA: ProductGroup[] = [

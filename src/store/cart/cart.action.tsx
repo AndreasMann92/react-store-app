@@ -1,10 +1,10 @@
 import { createAction } from "../../utils/reducer.utils";
-import { Product } from "../category/category.types";
+import { CategoryItem } from "../category/category.types";
 import { CartActionType, CartItemData } from "./cart.types";
 
 const addCartItem = (
   cartItems: CartItemData[],
-  productToAdd: Product
+  productToAdd: CategoryItem
 ): CartItemData[] => {
   const existingCartItem = cartItems.find(({ id }) => id === productToAdd.id);
   if (existingCartItem) {
@@ -22,7 +22,7 @@ const addCartItem = (
 
 const removeCartItem = (
   cartItems: CartItemData[],
-  productToRemove: Product
+  productToRemove: CategoryItem
 ) => {
   const existingCartItem = cartItems.find(
     (cartItem) => cartItem.id === productToRemove.id
@@ -53,7 +53,7 @@ export const setIsCartOpen = (val: boolean) =>
 
 export const addItemToCart = (
   cartItems: CartItemData[],
-  productToAdd: Product
+  productToAdd: CategoryItem
 ) => {
   const newCartItems = addCartItem(cartItems, productToAdd);
   return createAction(CartActionType.SET_CART_ITEMS, newCartItems);
@@ -61,7 +61,7 @@ export const addItemToCart = (
 
 export const removeItemFromCart = (
   cartItems: CartItemData[],
-  productToRemove: Product
+  productToRemove: CategoryItem
 ) => {
   const newCartItems = removeCartItem(cartItems, productToRemove);
   return createAction(CartActionType.SET_CART_ITEMS, newCartItems);
