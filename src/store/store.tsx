@@ -5,12 +5,18 @@ import {
   Middleware,
 } from "redux";
 import logger from "redux-logger";
-import { persistReducer, persistStore } from "redux-persist";
+import { PersistConfig, persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/es/storage";
 import createSagaMiddleware from "redux-saga";
-import { rootReducer } from "./root-reducer";
+import { rootReducer, RootState } from "./root-reducer";
 
 import { rootSaga } from "./root-saga";
+
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+  }
+}
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -22,12 +28,15 @@ const middleWares = [
 const composeEnhancer =
   (process.env.NODE_ENV !== "production" &&
     window &&
-    (window as { [key: string]: any })[
-      "__REDUX_DEVTOOLS_EXTENSION_COMPOSE__"
-    ]) ||
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
   compose;
 
-const persistConfig = {
+type ExtendedPersistConfig = PersistConfig<RootState> & {
+  whitelist?: (keyof RootState)[];
+  blacklist?: (keyof RootState)[];
+};
+
+const persistConfig: ExtendedPersistConfig = {
   key: "root",
   storage,
   blacklist: ["user"],

@@ -15,15 +15,3 @@ export type CartState = {
   isCartOpen: boolean;
   cartItems: CartItemData[];
 };
-
-export type CartAction = SetCartItemsAction | SetIsOpenAction;
-
-type SetCartItemsAction = {
-  type: CartActionType.SET_CART_ITEMS;
-  payload: CartItemData[];
-};
-
-type SetIsOpenAction = {
-  type: CartActionType.SET_IS_OPEN;
-  payload: boolean;
-};

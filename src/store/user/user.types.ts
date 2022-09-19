@@ -1,5 +1,4 @@
 import { User } from "firebase/auth";
-import { ActionWithPayload } from "../../utils/reducer.utils";
 
 export enum UserActionType {
   SET_CURRENT_USER = "user/SET_CURRENT_USER",
@@ -29,20 +28,9 @@ export type UserState = {
 
 export type UserSignUp = {
   displayName: string;
+} & UserSignIn;
+
+export type UserSignIn = {
   email: string;
   password: string;
 };
-
-export type UserAction =
-  | ActionWithPayload<UserActionType.SET_CURRENT_USER, User | undefined>
-  | ActionWithPayload<UserActionType.CHECK_USER_SESSION>
-  | ActionWithPayload<UserActionType.GOOGLE_SIGN_IN_START>
-  | ActionWithPayload<UserActionType.EMAIL_SIGN_IN_START, UserSignUp>
-  | ActionWithPayload<UserActionType.SIGN_IN_SUCCESS, User>
-  | ActionWithPayload<UserActionType.SIGN_IN_FAILED, Error>
-  | ActionWithPayload<UserActionType.SIGN_UP_START, UserSignUp>
-  | ActionWithPayload<UserActionType.SIGN_UP_SUCCESS, User>
-  | ActionWithPayload<UserActionType.SIGN_UP_FAILED, Error>
-  | ActionWithPayload<UserActionType.SIGN_OUT_START>
-  | ActionWithPayload<UserActionType.SIGN_OUT_SUCCESS>
-  | ActionWithPayload<UserActionType.SIGN_OUT_FAILED, Error>;

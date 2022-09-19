@@ -1,4 +1,8 @@
-import { createAction } from "../../utils/reducer.utils";
+import {
+  ActionWithPayload,
+  createAction,
+  withMatcher,
+} from "../../utils/reducer.utils";
 import { CategoryItem } from "../category/category.types";
 import { CartActionType, CartItemData } from "./cart.types";
 
@@ -48,8 +52,23 @@ const clearCartItem = (
   return [...cartItems];
 };
 
-export const setIsCartOpen = (val: boolean) =>
-  createAction(CartActionType.SET_IS_OPEN, val);
+export type CartAction = SetCartItemsAction | SetIsOpenAction;
+
+type SetCartItemsAction = ActionWithPayload<
+  CartActionType.SET_CART_ITEMS,
+  CartItemData[]
+>;
+type SetIsOpenAction = ActionWithPayload<CartActionType.SET_IS_OPEN, boolean>;
+
+export const setIsCartOpen = withMatcher(
+  (val: boolean): SetIsOpenAction =>
+    createAction(CartActionType.SET_IS_OPEN, val)
+);
+
+export const setCartItems = withMatcher(
+  (cartItems: CartItemData[]): SetCartItemsAction =>
+    createAction(CartActionType.SET_CART_ITEMS, cartItems)
+);
 
 export const addItemToCart = (
   cartItems: CartItemData[],
